@@ -1,0 +1,8 @@
+redis:
+    build: .
+    environment:
+        DNS_ADDR: https://torrid-heat-8734.firebaseio.com
+        INSTANCE: EC21
+        IS_KUBE: true
+    ports:
+        - "6379:6379"
