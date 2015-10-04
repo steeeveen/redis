@@ -1,5 +1,5 @@
 redis:
-    build: .
+    image: steeeveen/redis
     environment:
         DNS_ADDR: https://torrid-heat-8734.firebaseio.com
     ports:

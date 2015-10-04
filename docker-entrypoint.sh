@@ -22,10 +22,7 @@ do
     eval $setenv
 done
 
-if [ "$1" = 'redis-server' ]; then
-    echo $EC21
-	chown -R redis .
-	exec gosu redis redis-server --appendonly yes
-fi
+chown -R redis .
+exec gosu redis redis-server --appendonly yes
 
 exec "$@"
