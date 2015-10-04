@@ -2,13 +2,12 @@
 set -x
 
 #UPDATES MY OWN DNS SERVER
-echo $IS_KUBE
-if [ "$IS_KUBE" ]; then
-    echo "Updating DNS record"        
-    ipaddr=$(hostname -i)
-    curl -X PATCH -d '{"'$INSTANCE'":"'$ipaddr'"}' \
-          $DNS_ADDR'/dns.json'
-fi
+#if [ "$IS_KUBE" ]; then
+#    echo "Updating DNS record"        
+#    ipaddr=$(hostname -i)
+#    curl -X PATCH -d '{"'$INSTANCE'":"'$ipaddr'"}' \
+#          $DNS_ADDR'/dns.json'
+#fi
 
 dnsrecords=$(curl $DNS_ADDR'/dns.json')
 dnsrecords="${dnsrecords:1:${#dnsrecords}-2}"
@@ -26,7 +25,7 @@ done
 if [ "$1" = 'redis-server' ]; then
     echo $EC21
 	chown -R redis .
-	exec gosu redis "$@"
+	exec gosu redis redis-server --appendonly yes
 fi
 
 exec "$@"
